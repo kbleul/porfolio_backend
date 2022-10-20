@@ -2,11 +2,18 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors");
+const fileRoute = require("./Routes/fileRoutes")
+
+let path = require('path');
 
 const connectDB = require('./config/dbConn')
 const Message = require("./messageModel")
 
+global.__basedir = __dirname;
+
 const app = express()
+
+    app.use("/public", express.static(path.join(__dirname, 'public')));
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -25,7 +32,7 @@ const app = express()
     app.listen(4000, () => console.log(`Server running on port 4000`))
   })
 
-
+   // middlewares
   app.post("/api/sendMessage", async (req , res) => {
 
     try {
@@ -38,3 +45,5 @@ const app = express()
     } catch(error) { res.status(400).json({error : error.message}) }
 
   })
+
+  app.get("/api/resume/download", fileRoute )
