@@ -18,8 +18,8 @@ const Message = require("./messageModel")
 
 const app = express()
 
-    app.use("/public", express.static(path.join(__dirname, 'public')));
-    app.use(express.static('public'));
+    // app.use("/public", express.static(path.join(__dirname, 'public')));
+    // app.use(express.static('public'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
@@ -51,26 +51,30 @@ const app = express()
 
   })
 
-  app.get("/download", async function (req, res) {
-    cors({  exposedHeaders: ['Content-Disposition'],   }),
+  app.get("/download",  function (req, res) {
+//     cors({  exposedHeaders: ['Content-Disposition'],   }),
 
- console.log("add   ", `${__dirname}/public/files/resume.pdf` )
- console.log("add   ", `files/resume.pdf` )
+//  console.log("add   ", `${__dirname}/public/files/resume.pdf` )
+//  console.log("add   ", `files/resume.pdf` )
 
 
-        try {
-          const fileName = 'resume.pdf'
-          const fileURL = `./public/files/resume.pdf`
-          const stream = fs.createReadStream(fileURL);
-          res.set({
-            'Content-Disposition': `attachment; filename='${fileName}'`,
-            'Content-Type': 'application/pdf',
-          });
-          stream.pipe(res);
-        } catch (e) {
-          console.error(e)
-          res.status(500).end();
-        }
+//         try {
+//           const fileName = 'resume.pdf'
+//           const fileURL = `./public/files/resume.pdf`
+//           const stream = fs.createReadStream(fileURL);
+//           res.set({
+//             'Content-Disposition': `attachment; filename='${fileName}'`,
+//             'Content-Type': 'application/pdf',
+//           });
+//           stream.pipe(res);
+//         } catch (e) {
+//           console.error(e)
+//           res.status(500).end();
+//         }
       
-    }
- )
+//     }
+
+const filePath = `${__dirname}/public/files/resume.pdf`;
+
+    res.download(filePath);
+  })
