@@ -9,12 +9,16 @@ let path = require('path');
 const connectDB = require('./config/dbConn')
 const Message = require("./messageModel")
 
-global.__basedir = __dirname;
+// var static = require('node-static');
+// var http = require('http');
+
+// var file = new(static.Server)(__dirname);
+//global.__basedir = __dirname;
 
 const app = express()
 
-    app.use("/public", express.static(path.join(__dirname, 'public')));
-
+    // app.use("/public", express.static(path.join(__dirname, 'public')));
+    app.use(express.static('public'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
@@ -46,4 +50,6 @@ const app = express()
 
   })
 
-  app.get("/api/resume/download", fileRoute )
+  app.get("/api/resume/download", function (req, res) {
+    file.serve(req, res);
+  } )
