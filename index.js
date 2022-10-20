@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors");
-import fs from 'fs';
+const fs =  require("fs");
 // const fileRoute = require("./Routes/fileRoutes")
 
 let path = require('path');
