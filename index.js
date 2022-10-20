@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors");
+import fs from 'fs';
 // const fileRoute = require("./Routes/fileRoutes")
 
 let path = require('path');
@@ -50,8 +51,25 @@ const app = express()
 
   })
 
-  app.get("/api/resume/download", function (req, res) {
-    console.log(`${__dirname}/public/files/resume.pdf`)
-    const file = `${__dirname}/public/files/resume.pdf`;
-     res.download(file);
-  } )
+  app.get("/download", function (req, res) {
+    cors({
+      exposedHeaders: ['Content-Disposition'],
+    }),
+
+      async (req, res) => {
+        try {
+          const fileName = 'resume.pdf'
+          const fileURL = '/public/files/resume.pdf'
+          const stream = fs.createReadStream(fileURL);
+          res.set({
+            'Content-Disposition': `attachment; filename='${fileName}'`,
+            'Content-Type': 'application/pdf',
+          });
+          stream.pipe(res);
+        } catch (e) {
+          console.error(e)
+          res.status(500).end();
+        }
+      };
+    }
+ )
