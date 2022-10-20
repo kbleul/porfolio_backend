@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors");
-const fileRoute = require("./Routes/fileRoutes")
+// const fileRoute = require("./Routes/fileRoutes")
 
 let path = require('path');
 
@@ -51,5 +51,7 @@ const app = express()
   })
 
   app.get("/api/resume/download", function (req, res) {
-    file.serve(req, res);
+    console.log(`${__dirname}/public/files/resume.pdf`)
+    const file = `${__dirname}/public/files/resume.pdf`;
+     res.download(file);
   } )
