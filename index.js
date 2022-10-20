@@ -52,12 +52,10 @@ const app = express()
   })
 
   app.get("/download", async function (req, res) {
-    cors({
-      exposedHeaders: ['Content-Disposition'],
-    }),
+    cors({  exposedHeaders: ['Content-Disposition'],   }),
 
  console.log("add   ", `${__dirname}/public/files/resume.pdf` )
- 
+
         try {
           const fileName = 'resume.pdf'
           const fileURL = `${__dirname}/public/files/resume.pdf`
@@ -72,7 +70,5 @@ const app = express()
           res.status(500).end();
         }
       
-
-      download()
     }
  )
