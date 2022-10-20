@@ -2,19 +2,10 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors");
-const fs =  require("fs");
-// const fileRoute = require("./Routes/fileRoutes")
-
-let path = require('path');
 
 const connectDB = require('./config/dbConn')
 const Message = require("./messageModel")
 
-// var static = require('node-static');
-// var http = require('http');
-
-// var file = new(static.Server)(__dirname);
-//global.__basedir = __dirname;
 
 const app = express()
 
@@ -51,30 +42,3 @@ const app = express()
 
   })
 
-  app.get("/download",  function (req, res) {
-//     cors({  exposedHeaders: ['Content-Disposition'],   }),
-
-//  console.log("add   ", `${__dirname}/public/files/resume.pdf` )
-//  console.log("add   ", `files/resume.pdf` )
-
-
-//         try {
-//           const fileName = 'resume.pdf'
-//           const fileURL = `./public/files/resume.pdf`
-//           const stream = fs.createReadStream(fileURL);
-//           res.set({
-//             'Content-Disposition': `attachment; filename='${fileName}'`,
-//             'Content-Type': 'application/pdf',
-//           });
-//           stream.pipe(res);
-//         } catch (e) {
-//           console.error(e)
-//           res.status(500).end();
-//         }
-      
-//     }
-
-const filePath = `${__dirname}/public/files/resume.pdf`;
-
-    res.download(filePath);
-  })
