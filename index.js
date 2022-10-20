@@ -55,10 +55,12 @@ const app = express()
     cors({  exposedHeaders: ['Content-Disposition'],   }),
 
  console.log("add   ", `${__dirname}/public/files/resume.pdf` )
+ console.log("add   ", `files/resume.pdf` )
+
 
         try {
           const fileName = 'resume.pdf'
-          const fileURL = `${__dirname}/public/files/resume.pdf`
+          const fileURL = `./public/files/resume.pdf`
           const stream = fs.createReadStream(fileURL);
           res.set({
             'Content-Disposition': `attachment; filename='${fileName}'`,
